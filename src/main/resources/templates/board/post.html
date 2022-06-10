@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Board - Write</title>
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<div>
+	<form action="/post" method="post">
+		<div>
+			<div>
+				<label for="inputTitle"><strong>Title</strong></label>
+				<div>
+					<input type="text" name="title" id="inputTitle">
+				</div>
+			</div>
+		</div>
+		<div>
+			<label for="inputAuthor"><strong>Writer</strong></label>
+			<div>
+				<input type="text" name="author" id="inputAuthor">
+			</div>
+		</div>
+		<div>
+			<label for="inputContent"><strong>Content</strong></label>
+			<div>
+				<textarea name="content" id="inputContent" cols="30" rows="10"></textarea>
+			</div>
+		</div>
+		<div>
+			<div></div>
+			<div><input type="submit" role="button" value="Write"></div>
+		</div>
+	</form>
+</div>
+</body>
+</html>
