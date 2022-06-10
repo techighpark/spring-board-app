@@ -8,6 +8,7 @@ import study.board.dto.BoardDto;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -42,8 +43,16 @@ public class BoardService {
 
     @Transactional
     public BoardDto getPost(Long id){
-        Board board = boardRepository.findById(id).get();
+        Board board = boardRepository.findById(id).orElse(null);
+        Optional<Board> board2 = Optional.ofNullable(boardRepository.findById(id).orElse(null));
+        Optional<Board> board3 = boardRepository.findById(id);
+     
+        System.out.println(board);
+        System.out.println(board2);
+        System.out.println(board3);
 
+
+        assert board != null;
         return BoardDto.builder()
                 .id(board.getId())
                 .author(board.getAuthor())
