@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="@{'Board -' ${post.title}}"></title>
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<div>
+	<div>
+		<div>
+			<h5 th:text="@{${post.title} + ' - ' + ${post.author}}"></h5>
+			<p>
+				<small th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></small>
+			</p>
+			<p th:text="${post.content}"></p>
+		</div>
+	</div>
+	<div>
+		<div></div>
+		<div><a th:href="@{'/post/edit' + ${post.id}}" role="button"></a></div>
+	</div>
+	<div>
+		<form th:action="@{'/post/'+${post.id}}">
+			<input type="hidden" name="_method" value="delete" />
+			<button type="submit" id="delete-btn">Delete</button>
+		</form>
+	</div>
+
+</div>
+</body>
+</html>

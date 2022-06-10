@@ -3,6 +3,7 @@ package study.board.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import study.board.dto.BoardDto;
 import study.board.service.BoardService;
@@ -30,5 +31,12 @@ public class BoardController {
     public String write(BoardDto boardDto){
         boardService.savePost(boardDto);
         return "redirect:/";
+    }
+
+    @GetMapping("/post/{id}")
+    public String detail(@PathVariable("id") Long id, Model model){
+        BoardDto boardDto = boardService.getPost(id);
+        model.addAttribute("post", boardDto);
+        return "board/detail.html";
     }
 }
