@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title th:text="@{'Board -' ${post.title}}"></title>
+	<title th:text="@{'Board' + ${post.title}}"></title>
 </head>
 <body>
 <header th:insert="common/header.html"></header>
 <div>
 	<div>
 		<div>
-			<h5 th:text="@{${post.title} + ' - ' + ${post.author}}"></h5>
+			<h5 th:text="@{'Title : '+${post.title} + ' - Author : ' + ${post.author}}"></h5>
 			<p>
 				<small th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></small>
 			</p>
@@ -18,12 +18,12 @@
 	</div>
 	<div>
 		<div></div>
-		<div><a th:href="@{'/post/edit' + ${post.id}}" role="button"></a></div>
+		<div><a role="button" th:href="@{'/post/edit/' + ${post.id}}">Edit</a></div>
 	</div>
 	<div>
-		<form th:action="@{'/post/'+${post.id}}">
-			<input type="hidden" name="_method" value="delete" />
-			<button type="submit" id="delete-btn">Delete</button>
+		<form method="post" th:action="@{'/post/' + ${post.id}}">
+			<input name="_method" type="hidden" value="delete"/>
+			<button id="delete-btn" type="submit">Delete</button>
 		</form>
 	</div>
 

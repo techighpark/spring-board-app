@@ -1,7 +1,7 @@
 package study.board.service;
 
 import org.springframework.stereotype.Service;
-import study.board.domain.entity.Board;
+import study.board.domain.entity.BoardEntity;
 import study.board.domain.repository.BoardRepository;
 import study.board.dto.BoardDto;
 
@@ -25,16 +25,16 @@ public class BoardService {
 
     @Transactional
     public List<BoardDto> getBoardList() {
-        List<Board> boardList = boardRepository.findAll();
+        List<BoardEntity> boardList = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for (Board board : boardList) {
+        for (BoardEntity boardEntity : boardList) {
             BoardDto boardDto = BoardDto.builder()
-                    .id(board.getId())
-                    .author(board.getAuthor())
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .createdDate(board.getCreatedDate())
+                    .id(boardEntity.getId())
+                    .author(boardEntity.getAuthor())
+                    .title(boardEntity.getTitle())
+                    .content(boardEntity.getContent())
+                    .createdDate(boardEntity.getCreatedDate())
                     .build();
             boardDtoList.add(boardDto);
         }
@@ -42,24 +42,22 @@ public class BoardService {
     }
 
     @Transactional
-    public BoardDto getPost(Long id){
-        Board board = boardRepository.findById(id).orElse(null);
-        Optional<Board> board2 = Optional.ofNullable(boardRepository.findById(id).orElse(null));
-        Optional<Board> board3 = boardRepository.findById(id);
-     
-        System.out.println(board);
-        System.out.println(board2);
-        System.out.println(board3);
-
-
-        assert board != null;
+    public BoardDto getPost(Long id) {
+        BoardEntity boardEntity = boardRepository.findById(id).orElse(null);
+//        Optional<BoardEntity> board2 = Optional.ofNullable(boardRepository.findById(id).orElse(null));
+//        Optional<BoardEntity> board3 = boardRepository.findById(id);
+        assert boardEntity != null;
         return BoardDto.builder()
-                .id(board.getId())
-                .author(board.getAuthor())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .createdDate(board.getCreatedDate())
+                .id(boardEntity.getId())
+                .author(boardEntity.getAuthor())
+                .title(boardEntity.getTitle())
+                .content(boardEntity.getContent())
+                .createdDate(boardEntity.getCreatedDate())
                 .build();
+    }
 
+    @Transactional
+    public void deletePost(Long id) {
+        boardRepository.deleteById(id);
     }
 }

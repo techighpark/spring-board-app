@@ -7,32 +7,45 @@
 <body>
 <header th:insert="common/header.html"></header>
 <div>
-	<form action="/post" method="post">
+	<form action="/post" enctype="multipart/form-data" method="post">
 		<div>
 			<div>
 				<label for="inputTitle"><strong>Title</strong></label>
 				<div>
-					<input type="text" name="title" id="inputTitle">
+					<input id="inputTitle" name="title" type="text">
 				</div>
 			</div>
 		</div>
 		<div>
-			<label for="inputAuthor"><strong>Writer</strong></label>
+			<label for="inputAuthor"><strong>Author</strong></label>
 			<div>
-				<input type="text" name="author" id="inputAuthor">
+				<input id="inputAuthor" name="author" type="text">
 			</div>
 		</div>
 		<div>
 			<label for="inputContent"><strong>Content</strong></label>
 			<div>
-				<textarea name="content" id="inputContent" cols="30" rows="10"></textarea>
+				<textarea cols="30" id="inputContent" name="content" rows="10"></textarea>
+			</div>
+		</div>
+		<div><label for="inputFile"><strong>File Upload</strong></label>
+			<div>
+				<div id="inputFile">
+					<input class="custom-file-input" id="customFile" name="file" type="file" style="display: none">
+					<label for="customFile">Select file</label>
+				</div>
 			</div>
 		</div>
 		<div>
 			<div></div>
-			<div><input type="submit" role="button" value="Write"></div>
+			<div><input role="button" type="submit" value="Write"></div>
 		</div>
 	</form>
 </div>
 </body>
+<script>
+	$('.custom-file-input').on('change', function () {
+	const fileName = $(this).val().split('\\').pop();
+	$(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+})</script>
 </html>

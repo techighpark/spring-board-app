@@ -1,7 +1,7 @@
 package study.board.dto;
 
 import lombok.*;
-import study.board.domain.entity.Board;
+import study.board.domain.entity.BoardEntity;
 
 import java.time.LocalDateTime;
 
@@ -17,15 +17,15 @@ public class BoardDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public Board toEntity() {
-        Board build = Board.builder()
+    public BoardEntity toEntity() {
+        return BoardEntity.builder()
                 .id(id)
                 .author(author)
                 .title(title)
                 .content(content)
                 .build();
-        return build;
     }
+// why toEntity is need?
 
     @Builder
     public BoardDto(Long id, String author, String title, String content, LocalDateTime createdDate, LocalDateTime modifiedDate) {
